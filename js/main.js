@@ -89,4 +89,24 @@ document.getElementById('cForm').addEventListener('submit', function(e) {
   }, 3500);
 });
 
+
+// THEME TOGGLE
+const themeToggle = document.getElementById('themeToggle');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+// Charger le thème sauvegardé ou utiliser la préférence système
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+  document.body.classList.add('light');
+  themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+}
+
+themeToggle.addEventListener('click', () => {
+  const isLight = document.body.classList.toggle('light');
+  themeToggle.innerHTML = isLight
+    ? '<i class="fas fa-moon"></i>'
+    : '<i class="fas fa-sun"></i>';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+});
+
 window.addEventListener('load', highlightNav);
