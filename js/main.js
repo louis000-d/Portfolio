@@ -92,13 +92,22 @@ document.getElementById('cForm').addEventListener('submit', function(e) {
 
 // THEME TOGGLE
 const themeToggle = document.getElementById('themeToggle');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-// Charger le thème sauvegardé ou utiliser la préférence système
-const savedTheme = localStorage.getItem('theme');
+function getSavedTheme() {
+  try { return localStorage.getItem('theme'); } catch(e) { return null; }
+}
+function saveTheme(val) {
+  try { localStorage.setItem('theme', val); } catch(e) {}
+}
+
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const savedTheme  = getSavedTheme();
+
 if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
   document.body.classList.add('light');
   themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+} else {
+  themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
 }
 
 themeToggle.addEventListener('click', () => {
@@ -106,7 +115,7 @@ themeToggle.addEventListener('click', () => {
   themeToggle.innerHTML = isLight
     ? '<i class="fas fa-moon"></i>'
     : '<i class="fas fa-sun"></i>';
-  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  saveTheme(isLight ? 'light' : 'dark');
 });
 
 window.addEventListener('load', highlightNav);
