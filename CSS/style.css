@@ -21,6 +21,43 @@
   --tr:       0.28s cubic-bezier(.4,0,.2,1);
 }
 
+/* LIGHT MODE */
+body.light {
+  --bg:       #f0f4f8;
+  --bg-alt:   #e2eaf2;
+  --bg-card:  #ffffff;
+  --bg-card2: #f8fafc;
+  --border:   rgba(0,0,0,0.09);
+  --text:     #1e293b;
+  --muted:    #94a3b8;
+  --muted2:   #64748b;
+}
+
+/* THEME TOGGLE BUTTON */
+#themeToggle {
+  position: fixed;
+  top: 14px;
+  right: 76px;
+  z-index: 300;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--muted2);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: .9rem;
+  transition: var(--tr);
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+#themeToggle:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+  transform: translateY(-1px);
+}
+
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
 html { scroll-behavior:smooth; scroll-padding-top:var(--nav-h) }
 body { background:var(--bg); color:var(--text); font-family:var(--font); font-size:16px; line-height:1.7; overflow-x:hidden }
@@ -58,6 +95,7 @@ ul { list-style:none }
 /* NAVBAR */
 #navbar { position:fixed; top:0; left:0; right:0; height:var(--nav-h); z-index:200; transition:var(--tr) }
 #navbar.scrolled { background:rgba(13,27,42,.92); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-bottom:1px solid var(--border) }
+body.light #navbar.scrolled { background:rgba(240,244,248,.95) }
 .nav-inner { max-width:1140px; margin:0 auto; padding:0 28px; height:100%; display:flex; align-items:center; justify-content:space-between }
 .nav-brand { display:flex; align-items:center; gap:10px; font-size:1.1rem; font-weight:700 }
 .brand-icon { width:36px; height:36px; border-radius:8px; display:grid; place-items:center; font-size:.9rem }
@@ -71,6 +109,7 @@ ul { list-style:none }
 /* HERO */
 #accueil { position:relative; min-height:100vh; display:flex; align-items:center; padding-top:var(--nav-h); overflow:hidden }
 .hero-grid-bg { position:absolute; inset:0; background-image:linear-gradient(rgba(249,115,22,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(249,115,22,.035) 1px,transparent 1px); background-size:55px 55px; mask-image:radial-gradient(ellipse 75% 75% at 50% 50%,black,transparent) }
+body.light .hero-grid-bg { background-image:linear-gradient(rgba(249,115,22,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(249,115,22,.07) 1px,transparent 1px) }
 .hero-glow { position:absolute; width:600px; height:600px; top:50%; left:-100px; transform:translateY(-50%); background:radial-gradient(circle,rgba(249,115,22,.07) 0%,transparent 70%); pointer-events:none }
 .hero-content { position:relative; z-index:1 }
 .hero-badge { display:inline-flex; align-items:center; gap:8px; background:var(--orange-d); border:1px solid rgba(249,115,22,.3); border-radius:999px; padding:5px 16px; font-size:.78rem; font-weight:600; color:var(--orange); margin-bottom:28px }
@@ -165,6 +204,11 @@ ul { list-style:none }
   font-weight: 500;
   border: 1px solid rgba(255, 255, 255, 0.3);
   transition: all 0.2s ease;
+}
+body.light .skill-tag {
+  background: rgba(0,0,0,0.06);
+  color: var(--text);
+  border-color: rgba(0,0,0,0.12);
 }
 
 .skill-tag:hover {
@@ -311,6 +355,7 @@ footer { padding:28px 0; border-top:1px solid var(--border) }
 }
 @media (max-width:680px) {
   .nav-links { display:none; position:absolute; top:var(--nav-h); left:0; right:0; flex-direction:column; background:rgba(10,21,32,.98); border-bottom:1px solid var(--border); padding:14px; gap:3px }
+  body.light .nav-links { background:rgba(240,244,248,.98) }
   .nav-links.open { display:flex }
   .burger    { display:flex }
   .docs-grid { grid-template-columns:1fr }
@@ -530,7 +575,7 @@ footer { padding:28px 0; border-top:1px solid var(--border) }
                     linear-gradient(135deg, var(--orange), rgba(249,115,22,0.2));
   background-origin: border-box;
   background-clip: padding-box, border-box;
-  box-shadow: 0 0 25px rgba(249, 115, 22, 0.15); /* Halo doux */
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.15);
 }
 
 .ap-card.border-gradient-purple {
